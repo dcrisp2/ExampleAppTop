@@ -1,0 +1,191 @@
+####-------------------------------------------------------------####	
+#	Channel Logic for and from individual Beamline Gate Valves      #
+#	{ System , SubSystem , Instance , Area }                        #
+####-------------------------------------------------------------####
+#
+####-------------------------------------------------------------####
+#	Beamline Gate Valves Open; FVST, "Local BGV(s) OPN"             #
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):BGV_SECT1:LOPN_CALC")
+{
+	field(DESC, "Calc Local BGV(s) ~Closed ILK")
+	field(INPA, "$(System):$(Area):BGV_D0862:LMCL_RSTS CP NMS")
+	field(INPB, "$(System):$(Area):BGV_D0894:LMCL_RSTS CP NMS")
+	field(INPC, "$(System):$(Area):BGV_D1000:LMCL_RSTS CP NMS")
+	field(INPD, "$(System):$(Area):BGV_D1003:LMCL_RSTS CP NMS")
+	field(CALC, "A + B + C + D = 4 ? 0 : 5")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):BGV_SECT1:FWD_LOPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):BGV_SECT1:FWD_LOPN_ILK")
+{
+	field(DESC, "Forwarding BGV(s) ~Closed ILK")
+	field(DOL,  "$(System):$(Area):BGV_SECT1:LOPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX1):RV_$(BOX1F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX1):RV_$(BOX1R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX2):RV_$(BOX2F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX2):RV_$(BOX2R):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX2):VV_$(BOX2F):PLC_ILKS PP NMS")
+}
+
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):BGV_SECT2:LOPN_CALC")
+{
+	field(DESC, "Calc Local BGV(s) ~Closed ILK")
+	field(INPA, "$(System):$(Area):BGV_D0894:LMCL_RSTS CP NMS")
+	field(INPB, "$(System):$(Area):BGV_D0949:LMCL_RSTS CP NMS")
+	field(CALC, "A + B = 2 ? 0 : 5")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):BGV_SECT2:FWD_LOPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):BGV_SECT2:FWD_LOPN_ILK")
+{
+	field(DESC, "Forwarding BGV(s) ~Closed ILK")
+	field(DOL,  "$(System):$(Area):BGV_SECT2:LOPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX3):RV_$(BOX3F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX3):RV_$(BOX3R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX4):RV_$(BOX4F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX4):RV_$(BOX4R):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX4):VV_$(BOX4F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):BGV_SECT3:LOPN_CALC")
+{
+	field(DESC, "Calc Local BGV(s) ~Closed ILK")
+	field(INPA, "$(System):$(Area):BGV_D1000:LMCL_RSTS CP NMS")
+	field(CALC, "A = 1 ? 0 : 5")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):BGV_SECT3:FWD_LOPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):BGV_SECT3:FWD_LOPN_ILK")
+{
+	field(DESC, "Forwarding BGV(s) ~Closed ILK")
+	field(DOL,  "$(System):$(Area):BGV_SECT3:LOPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX5):RV_$(BOX5F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX5):RV_$(BOX5R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX5):VV_$(BOX5F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+#	Channels made to forward needed interlocks to sets of BGVs      #
+####----------------------------------------------------------------#
+
+record(dfanout, "$(System):$(Area):BGV_SECT1:FWD_ILK")
+{
+	field(DESC, "Forwarding ILKs to SECT1 BGVs")
+	field(OUTA, "$(System):$(Area):BGV_D0862:PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area):BGV_D0894:PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area):BGV_D1000:PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area):BGV_D1003:PLC_ILKS PP NMS")
+}
+
+record(dfanout, "$(System):$(Area):BGV_SECT2:FWD_ILK")
+{
+	field(DESC, "Forwarding ILKs to SECT2 BGVs")
+	field(OUTA, "$(System):$(Area):BGV_D0894:PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area):BGV_D0949:PLC_ILKS PP NMS")
+}
+
+record(dfanout, "$(System):$(Area):BGV_SECT3:FWD_ILK")
+{
+	field(DESC, "Forwarding ILKs to SECT3 BGVs")
+	field(OUTA, "$(System):$(Area):BGV_D1000:PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+#	Channels for farming relevant ILKs for forwarding to BGV sets   #
+#	Use of *SECT1* here is an exception to the way it's been used.. #
+#		It's not CCGs FROM SECT1, but CCG status' being gathered    #
+#		FOR SECT1 BGVs                                              #
+####----------------------------------------------------------------#
+
+record(calcout, "$(System):$(Area):PG_SECT1:VP1_CALC")
+{
+	field(DESC, "Calc PLC PG VP1 Status")
+	field(INPA, "$(System):$(Area)_$(BOX1):PG_$(BOX1R):OK_RSTS_VP1 CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX2):PG_$(BOX2R):OK_RSTS_VP1 CP NMS")
+	field(CALC, "A + B = 2 ? 0 : 8")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):BGV_SECT1:FWD_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(calcout, "$(System):$(Area):PG_SECT2:VP1_CALC")
+{
+	field(DESC, "Calc PLC PG VP1 Status")
+	field(INPA, "$(System):$(Area)_$(BOX3):PG_$(BOX3R):OK_RSTS_VP1 CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX4):PG_$(BOX4R):OK_RSTS_VP1 CP NMS")
+	field(CALC, "A + B = 2 ? 0 : 8")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):BGV_SECT2:FWD_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(calcout, "$(System):$(Area):PG_SECT3:VP1_CALC")
+{
+	field(DESC, "Calc PLC PG VP1 Status")
+	field(INPA, "$(System):$(Area)_$(BOX5):PG_$(BOX5R):OK_RSTS_VP1 CP NMS")
+	field(CALC, "A = 1 ? 0 : 8")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):BGV_SECT3:FWD_ILK PP NMS")
+	field(PINI, "1")
+}
+
+####-------------------------------------------------------------####
+#	Channels for farming relevant ILKs for forwarding to BGV sets   #
+#	Use of *SECT1* here is an exception to the way it's been used.. #
+#		It's not gauges FROM SECT1, but their states calc'ed        #
+#		FOR SECT1 BGVs                                              #
+####----------------------------------------------------------------#
+
+record(calcout, "$(System):$(Area):CCG_SECT1:VP1_CALC")
+{
+	field(DESC, "Calc PLC CCG VP1 Status")
+	field(INPA, "$(System):$(Area)_$(BOX1):CCG_$(BOX1F):OK_RSTS_VP1 CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX2):CCG_$(BOX2F):OK_RSTS_VP1 CP NMS")
+	field(CALC, "A + B = 2 ? 0 : 9")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):BGV_SECT1:FWD_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(calcout, "$(System):$(Area):CCG_SECT2:VP1_CALC")
+{
+	field(DESC, "Calc PLC CCG VP1 Status")
+	field(INPA, "$(System):$(Area)_$(BOX3):CCG_$(BOX3F):OK_RSTS_VP1 CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX4):CCG_$(BOX4F):OK_RSTS_VP1 CP NMS")
+	field(CALC, "A + B = 2 ? 0 : 9")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):BGV_SECT2:FWD_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(calcout, "$(System):$(Area):CCG_SECT3:VP1_CALC")
+{
+	field(DESC, "Calc PLC CCG VP1 Status")
+	field(INPA, "$(System):$(Area)_$(BOX5):CCG_$(BOX5F):OK_RSTS_VP1 CP NMS")
+	field(CALC, "A = 1 ? 0 : 9")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):BGV_SECT3:FWD_ILK PP NMS")
+	field(PINI, "1")
+}

@@ -1,0 +1,82 @@
+####-------------------------------------------------------------####	
+#	Channel Logic Overview Screen Vac Logic                         #
+#	{ System , SubSystem , Instance , BOX , Area }                  #
+####-------------------------------------------------------------####
+#
+####-------------------------------------------------------------####
+#	Local Roughing Valve Open; THST, "Local RV Open"                #
+####-------------------------------------------------------------####
+#
+#record(calcout, "$(System):$(Area):RV_SECT1:LOPN_CALC")
+#{
+#	field(DESC, "Calc PLC Local OPN Status")
+#	field(INPA, "$(System):$(Area)_$(BOX1):RV_$(BOX1F):LMCL_RSTS CP NMS")
+#	field(INPB, "$(System):$(Area)_$(BOX1):RV_$(BOX1R):LMCL_RSTS CP NMS")
+#	field(INPC, "$(System):$(Area)_$(BOX2):RV_$(BOX2F):LMCL_RSTS CP NMS")
+#	field(INPD, "$(System):$(Area)_$(BOX2):RV_$(BOX2R):LMCL_RSTS CP NMS")
+#	field(CALC, "A + B + C + D = 4 ? 0 : 3")
+#	field(OOPT, "On Change")
+#	field(DOPT, "Use CALC")
+#	field(OUT,  "$(System):$(Area):RV_SECT1:FWD_LOPN_ILK PP NMS")
+#	field(PINI, "1")
+#}
+#
+#record(dfanout, "$(System):$(Area):RV_SECT1:FWD_LOPN_ILK")
+#{
+#	field(DESC, "Forwarding Local OPN ILK state")
+#	field(DOL,  "$(System):$(Area):RV_SECT1:LOPN_CALC")
+#	field(OUTA, "$(System):$(Area)_$(BOX1):RV_$(BOX1F):PLC_ILKS PP NMS")
+#	field(OUTB, "$(System):$(Area)_$(BOX1):RV_$(BOX1R):PLC_ILKS PP NMS")
+#	field(OUTC, "$(System):$(Area)_$(BOX1):TGV_$(BOX1F):PLC_ILKS PP NMS")
+#	field(OUTD, "$(System):$(Area)_$(BOX2):RV_$(BOX2F):PLC_ILKS PP NMS")
+#	field(OUTE, "$(System):$(Area)_$(BOX2):RV_$(BOX2R):PLC_ILKS PP NMS")
+#	field(OUTF, "$(System):$(Area)_$(BOX2):TGV_$(BOX2F):PLC_ILKS PP NMS")
+#}
+#
+####-------------------------------------------------------------####
+####-------------------------------------------------------------####
+#	Foreline Pirani Gauge reading low; FTST, "FPG not at SP"        #
+####-------------------------------------------------------------####
+#
+#record(calcout, "$(System):$(Area):FPG_$(BOX):VP1_CALC")
+#{
+#	field(DESC, "Calc PLC Foreline VP1 Status")
+#	field(INPA, "$(System):$(Area)_$(BOX):FPG_$(Instance):OK_RSTS_VP1 CP NMS")
+#	field(CALC, "A = 1 ? 0 : 14")
+#	field(OOPT, "On Change")
+#	field(DOPT, "Use CALC")
+#	field(OUT,  "$(System):$(Area):FPG_$(BOX):FWD_LVP1_ILK PP NMS")
+#	field(PINI, "1")
+#}
+#
+#record(dfanout, "$(System):$(Area):FPG_$(BOX):FWD_VP1_ILK")
+#{
+#	field(DESC, "Forwarding Foreline VP1 ILK State")
+#	field(DOL,  "$(System):$(Area):FPG_$(BOX):VP1_CALC")
+#	field(OUTA, "$(System):$(Area)_$(BOX):FV_$(Instance):PLC_ILKS PP NMS")
+#	field(OUTB, "$(System):$(Area)_$(BOX):TGV_$(Instance):PLC_ILKS PP NMS")
+#}
+#
+####-------------------------------------------------------------####
+#	Turbo Molecular Pump not At Speed; FFST, "TMP not At Speed"     #
+####-------------------------------------------------------------####
+#
+#record(calcout, "$(System):$(Area):TMP_$(BOX):AS_CALC")
+#{
+#	field(DESC, "Calc PLC TMP ~At Speed Status")
+#	field(INPA, "$(System):$(Area)_$(BOX):FPG_$(Instance):OK_RSTS_VP1 CP NMS")
+#	field(CALC, "A = 1 ? 0 : 15")
+#	field(OOPT, "On Change")
+#	field(DOPT, "Use CALC")
+#	field(OUT,  "$(System):$(Area):TGV_$(Instance):PLC_ILKS PP NMS")
+#	field(PINI, "1")
+#}
+#
+#record(dfanout, "$(System):$(Area):TMP_$(BOX):FWD_AS_ILK")
+#{
+#	field(DESC, "Forwarding ~At Speed ILK State")
+#	field(DOL,  "$(System):$(Area):FPG_$(BOX):AS_CALC")
+##	field(OUTA, "$(System):$(Area)_$(BOX):FV_$(Instance):PLC_ILKS PP NMS")
+#	field(OUTA, "$(System):$(Area)_$(BOX):TGV_$(Instance):PLC_ILKS PP NMS")
+#}
+#

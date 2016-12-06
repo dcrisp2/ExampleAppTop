@@ -1,0 +1,142 @@
+####-------------------------------------------------------------####	
+#	Device channels for a mock up vacuum system, Devices including: #
+#		RV, FV, TGV, VV, BGV, PG, FPG, CCG, and TMP                 #
+#	Channel Logic included is the intended result for testing and   #
+#		eventual implementation--Replacing vacuum logic currently   #
+#		embedded in Panel Mate controls screens                     #
+#	The build of these files/channels were modeled after the QA     #
+#		and LA sections in ReA: BTS10/BTS02. Desire scope increase  #
+#		for use in other beamline areas: ReA Linac & Extension.     #
+####-------------------------------------------------------------####
+
+# 6 channels per call
+file db/VacValves.db {
+	pattern { System , SubSystem , Device , Instance , BOX , Area , Man }
+		{ "REA" , "BTS10" , "FV"  , "D0864" , "BOB1" , "QA" , "FMAN" }
+		{ "REA" , "BTS10" , "RV"  , "D0864" , "BOB1" , "QA" , "FMAN" }
+		{ "REA" , "BTS10" , "FV"  , "D0865" , "BOB1" , "QA" , "RMAN" }
+		{ "REA" , "BTS10" , "RV"  , "D0865" , "BOB1" , "QA" , "RMAN" }
+		{ "REA" , "BTS10" , "TGV" , "D0864" , "BOB1" , "QA" , "Depends" }
+
+		{ "REA" , "BTS10" , "FV"  , "D0892" , "BOB2" , "QA" , "FMAN" }
+		{ "REA" , "BTS10" , "RV"  , "D0892" , "BOB2" , "QA" , "FMAN" }
+		{ "REA" , "BTS10" , "FV"  , "D0893" , "BOB2" , "QA" , "RMAN" }
+		{ "REA" , "BTS10" , "RV"  , "D0893" , "BOB2" , "QA" , "RMAN" }
+		{ "REA" , "BTS10" , "TGV" , "D0892" , "BOB2" , "QA" , "Depends" }
+
+		{ "REA" , "BTS10" , "FV"  , "D0918" , "BOB3" , "QA" , "FMAN" }
+		{ "REA" , "BTS10" , "RV"  , "D0918" , "BOB3" , "QA" , "FMAN" }
+		{ "REA" , "BTS10" , "FV"  , "D0919" , "BOB3" , "QA" , "RMAN" }
+		{ "REA" , "BTS10" , "RV"  , "D0919" , "BOB3" , "QA" , "RMAN" }
+		{ "REA" , "BTS10" , "TGV" , "D0918" , "BOB3" , "QA" , "Depends" }
+
+		{ "REA" , "BTS10" , "FV"  , "D0947" , "BOB4" , "QA" , "FMAN" }
+		{ "REA" , "BTS10" , "RV"  , "D0947" , "BOB4" , "QA" , "FMAN" }
+		{ "REA" , "BTS10" , "FV"  , "D0948" , "BOB4" , "QA" , "RMAN" }
+		{ "REA" , "BTS10" , "RV"  , "D0948" , "BOB4" , "QA" , "RMAN" }
+		{ "REA" , "BTS10" , "TGV" , "D0947" , "BOB4" , "QA" , "Depends" }
+
+		{ "REA" , "BTS02" , "FV"  , "D0999" , "LA" , "QA" , "FMAN" }
+		{ "REA" , "BTS02" , "RV"  , "D0999" , "LA" , "QA" , "FMAN" }
+		{ "REA" , "BTS02" , "FV"  , "D1000" , "LA" , "QA" , "RMAN" }
+		{ "REA" , "BTS02" , "RV"  , "D1000" , "LA" , "QA" , "RMAN" }
+		{ "REA" , "BTS02" , "TGV" , "D0999" , "LA" , "QA" , "Depends" }
+}
+
+#	Just like VacValves, but without LMCL, or a 'Man' field.
+#   5 channels per call
+file db/VacValves_NoLMCL.db {
+	pattern { System , SubSystem , Device , Instance , BOX , Area }
+		{ "REA" , "BTS10" , "VV"  , "D0892" , "BOB2" , "QA" }
+		{ "REA" , "BTS10" , "VV"  , "D0947" , "BOB4" , "QA" }
+		{ "REA" , "BTS02" , "VV"  , "D0999" , "LA" , "QA" }
+}
+
+#	5 channels per call
+file db/PressureGauges.db {
+	pattern { System , SubSystem , Device , Instance , BOX , Area }
+		{ "REA" , "BTS10" , "FPG" , "D0864" , "BOB1" , "QA" }
+		{ "REA" , "BTS10" , "CCG" , "D0864" , "BOB1" , "QA" }
+		{ "REA" , "BTS10" , "PG"  , "D0865" , "BOB1" , "QA" }
+		{ "REA" , "BTS10" , "FPG" , "D0892" , "BOB2" , "QA" }
+		{ "REA" , "BTS10" , "CCG" , "D0892" , "BOB2" , "QA" }
+		{ "REA" , "BTS10" , "PG"  , "D0893" , "BOB2" , "QA" }
+		{ "REA" , "BTS10" , "FPG" , "D0918" , "BOB3" , "QA" }
+		{ "REA" , "BTS10" , "CCG" , "D0918" , "BOB3" , "QA" }
+		{ "REA" , "BTS10" , "PG"  , "D0919" , "BOB3" , "QA" }
+		{ "REA" , "BTS10" , "FPG" , "D0947" , "BOB4" , "QA" }
+		{ "REA" , "BTS10" , "CCG" , "D0947" , "BOB4" , "QA" }
+		{ "REA" , "BTS10" , "PG"  , "D0948" , "BOB4" , "QA" }
+		{ "REA" , "BTS02" , "FPG" , "D0999" , "LA"   , "QA" }
+		{ "REA" , "BTS02" , "CCG" , "D0999" , "LA"   , "QA" }
+		{ "REA" , "BTS02" , "PG"  , "D1000" , "LA"   , "QA" }
+		{ "REA" , "BTS10" , "PG"  , "D0855" , "VAC"  , "QA" }
+		{ "REA" , "BTS10" , "PG"  , "D0856" , "VAC"  , "QA" }
+}
+
+#	6 Channels per call
+file db/BeamlineGateValves.db {
+	pattern { System , SubSystem , Instance , Area }
+		{ "REA" , "BTS10" , "D0862" , "QA" }
+		{ "REA" , "BTS10" , "D0894" , "QA" }
+		{ "REA" , "BTS10" , "D0949" , "QA" }
+		{ "REA" , "BTS04" , "D1003" , "QA" }
+		{ "REA" , "BTS02" , "D1000" , "QA" }
+}
+
+#	5 channels per call
+file db/Pumps.db {
+	pattern { System , SubSystem , Device , Instance , BOX , Area }
+		{ "REA" , "BTS10" , "TMP" , "D0864" , "BOB1" , "QA" }
+		{ "REA" , "BTS10" , "TMP" , "D0892" , "BOB2" , "QA" }
+		{ "REA" , "BTS10" , "TMP" , "D0918" , "BOB3" , "QA" }
+		{ "REA" , "BTS10" , "TMP" , "D0947" , "BOB4" , "QA" }
+		{ "REA" , "BTS02" , "TMP" , "D0999" , "LA"   , "QA" }
+}
+
+#	18 channels
+file db/ManStat.db {
+	pattern { System, Area, BOX1, BOX2, BOX3, BOX4, BOX5, BOX1F, BOX1R, BOX2F, BOX2R, BOX3F, BOX3R, BOX4F, BOX4R, BOX5F, BOX5R }
+		{ REA, QA, BOB1, BOB2, BOB3, BOB4, LA, D0864, D0865, D0892, D0893, D0918, D0919, D0947, D0948, D0999, D1000 }
+}
+
+#	36 channels
+file db/LocStat.db {
+	pattern { System, Area, BOX1, BOX2, BOX3, BOX4, BOX5, BOX1F, BOX1R, BOX2F, BOX2R, BOX3F, BOX3R, BOX4F, BOX4R, BOX5F, BOX5R }
+		{ REA, QA, BOB1, BOB2, BOB3, BOB4, LA, D0864, D0865, D0892, D0893, D0918, D0919, D0947, D0948, D0999, D1000 }
+}
+
+#	2 channels per call
+file db/BoxStat.db {
+	pattern { System , SubSystem , Instance , BOX , Area }
+		{ "REA" , "BTS10" , "D0864" , "BOB1" , "QA" }
+		{ "REA" , "BTS10" , "D0892" , "BOB2" , "QA" }
+		{ "REA" , "BTS10" , "D0918" , "BOB3" , "QA" }
+		{ "REA" , "BTS10" , "D0947" , "BOB4" , "QA" }
+		{ "REA" , "BTS02" , "D0999" , "LA"   , "QA" }
+}
+
+#	BGV instances are hard-coded into this db file--need to consider scalability
+#	6 channels
+file db/BeamlineGVStat.db {
+	pattern { System, Area, BOX1, BOX2, BOX3, BOX4, BOX5, BOX1F, BOX1R, BOX2F, BOX2R, BOX3F, BOX3R, BOX4F, BOX4R, BOX5F, BOX5R }
+		{ REA, QA, BOB1, BOB2, BOB3, BOB4, LA, D0864, D0865, D0892, D0893, D0918, D0919, D0947, D0948, D0999, D1000 }
+}
+
+file db/scan.db {
+	pattern { P }
+		{ Demo:Scan: }
+}
+file db/simulation.db
+file db/table.db {
+	pattern { S }
+		{ Demo }
+}
+file db/range.db {
+	pattern { S }
+		{ Demo }
+}
+file db/fit.db {
+	pattern { S }
+		{ Demo }
+}

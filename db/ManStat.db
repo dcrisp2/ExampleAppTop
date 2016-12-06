@@ -1,0 +1,253 @@
+####-------------------------------------------------------------####	
+#	Channel Logic for Manifold level scope...                       #
+#		'Manifold Already Roughing' || 'Manifold Backing Turbo' ||  #
+#		'Manifold Vac State'                                        #
+#	{ System, Area, BOX1, BOX2, BOX3, BOX4, BOX5, BOX1F, BOX1R,     #
+#		BOX2F, BOX2R, BOX3F, BOX3R, BOX4F, BOX4R, BOX5F, BOX5R }    #
+#	{ REA,    QA,   BOB1, BOB2, BOB3, BOB4, LA,   D0864, D0865,     #
+#		D0892, D0893, D0918, D0919, D0947, D0948, D0999, D1000 }    #
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):RV_FMAN:OPN_CALC")
+{
+	field(DESC, "Calc PLC LMCL_ILK Status")
+	field(INPA, "$(System):$(Area)_$(BOX1):RV_$(BOX1F):LMCL_RSTS CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX2):RV_$(BOX2F):LMCL_RSTS CP NMS")
+	field(INPC, "$(System):$(Area)_$(BOX3):RV_$(BOX3F):LMCL_RSTS CP NMS")
+	field(INPD, "$(System):$(Area)_$(BOX4):RV_$(BOX4F):LMCL_RSTS CP NMS")
+	field(INPE, "$(System):$(Area)_$(BOX5):RV_$(BOX5F):LMCL_RSTS CP NMS")
+	field(CALC, "A + B + C + D + E = 5 ? 0 : 2")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):RV_FMAN:FWD_OPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):RV_FMAN:FWD_OPN_ILK")
+{
+	field(DESC, "Forwarding RV_FMAN ILK state")
+	field(DOL,  "$(System):$(Area):RV_FMAN:OPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX1):RV_$(BOX1F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX2):RV_$(BOX2F):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX3):RV_$(BOX3F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX4):RV_$(BOX4F):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX5):RV_$(BOX5F):PLC_ILKS PP NMS")
+	field(OUTF, "$(System):$(Area):RV_FMAN:FWD2_OPN_ILK PP NMS")
+}
+
+record(dfanout, "$(System):$(Area):RV_FMAN:FWD2_OPN_ILK")
+{
+	field(DESC, "Forwarding RV_FMAN ILK state")
+	field(OUTA, "$(System):$(Area)_$(BOX1):FV_$(BOX1F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX2):FV_$(BOX2F):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX3):FV_$(BOX3F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX4):FV_$(BOX4F):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX5):FV_$(BOX5F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):RV_RMAN:OPN_CALC")
+{
+	field(DESC, "Calc PLC LMCL_ILK Status")
+	field(INPA, "$(System):$(Area)_$(BOX1):RV_$(BOX1R):LMCL_RSTS CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX2):RV_$(BOX2R):LMCL_RSTS CP NMS")
+	field(INPC, "$(System):$(Area)_$(BOX3):RV_$(BOX3R):LMCL_RSTS CP NMS")
+	field(INPD, "$(System):$(Area)_$(BOX4):RV_$(BOX4R):LMCL_RSTS CP NMS")
+	field(INPE, "$(System):$(Area)_$(BOX5):RV_$(BOX5R):LMCL_RSTS CP NMS")
+	field(CALC, "A + B + C + D + E = 5 ? 0 : 2")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):RV_RMAN:FWD_OPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):RV_RMAN:FWD_OPN_ILK")
+{
+	field(DESC, "Forwarding RV_RMAN ILK state")
+	field(DOL,  "$(System):$(Area):RV_RMAN:OPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX1):RV_$(BOX1R):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX2):RV_$(BOX2R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX3):RV_$(BOX3R):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX4):RV_$(BOX4R):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX5):RV_$(BOX5R):PLC_ILKS PP NMS")
+	field(OUTF, "$(System):$(Area):RV_RMAN:FWD2_OPN_ILK PP NMS")
+}
+
+record(dfanout, "$(System):$(Area):RV_RMAN:FWD2_OPN_ILK")
+{
+	field(DESC, "Forwarding RV_RMAN ILK state")
+	field(OUTA, "$(System):$(Area)_$(BOX1):FV_$(BOX1R):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX2):FV_$(BOX2R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX3):FV_$(BOX3R):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX4):FV_$(BOX4R):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX5):FV_$(BOX5R):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):FV_FMAN:OPN_CALC")
+{
+	field(DESC, "Calc PLC LMCL_ILK Status")
+	field(INPA, "$(System):$(Area)_$(BOX1):FV_$(BOX1F):LMCL_RSTS CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX2):FV_$(BOX2F):LMCL_RSTS CP NMS")
+	field(INPC, "$(System):$(Area)_$(BOX3):FV_$(BOX3F):LMCL_RSTS CP NMS")
+	field(INPD, "$(System):$(Area)_$(BOX4):FV_$(BOX4F):LMCL_RSTS CP NMS")
+	field(INPE, "$(System):$(Area)_$(BOX5):FV_$(BOX5F):LMCL_RSTS CP NMS")
+	field(CALC, "A + B + C + D + E = 5 ? 0 : 1")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):FV_FMAN:FWD_OPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):FV_FMAN:FWD_OPN_ILK")
+{
+	field(DESC, "Forwarding FV_FMAN ILK state")
+	field(DOL,  "$(System):$(Area):FV_FMAN:OPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX1):RV_$(BOX1F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX2):RV_$(BOX2F):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX3):RV_$(BOX3F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX4):RV_$(BOX4F):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX5):RV_$(BOX5F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):FV_RMAN:OPN_CALC")
+{
+	field(DESC, "Calc PLC LMCL_ILK Status")
+	field(INPA, "$(System):$(Area)_$(BOX1):FV_$(BOX1R):LMCL_RSTS CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX2):FV_$(BOX2R):LMCL_RSTS CP NMS")
+	field(INPC, "$(System):$(Area)_$(BOX3):FV_$(BOX3R):LMCL_RSTS CP NMS")
+	field(INPD, "$(System):$(Area)_$(BOX4):FV_$(BOX4R):LMCL_RSTS CP NMS")
+	field(INPE, "$(System):$(Area)_$(BOX5):FV_$(BOX5R):LMCL_RSTS CP NMS")
+	field(CALC, "A + B + C + D + E = 5 ? 0 : 1")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):FV_RMAN:FWD_OPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):FV_RMAN:FWD_OPN_ILK")
+{
+	field(DESC, "Forwarding FV_RMAN ILK state")
+	field(DOL,  "$(System):$(Area):FV_RMAN:OPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX1):RV_$(BOX1R):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX2):RV_$(BOX2R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX3):RV_$(BOX3R):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX4):RV_$(BOX4R):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX5):RV_$(BOX5R):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+#	QA F-Manifold Status; X < 0.05Torr < X < 0.100Torr < X          #
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):VAC_FMAN:COND1_CALC")
+{
+	field(DESC, "Calc Vacuum Status Condition")
+	field(VAL, "0")
+	field(INPA, "$(System)_BTS10:PG_D0855:VP_RD CP NMS")
+	field(INPB, "0.050")
+	field(CALC, "A < B ? 1 : 0")
+	field(OOPT, "Transition To Non-zero")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):VAC_FMAN:VP_STATE PP NMS")
+	field(PINI, "1")
+}
+
+record(calcout, "$(System):$(Area):VAC_FMAN:COND2_CALC")
+{
+	field(DESC, "Calc Vacuum Status Condition")
+	field(VAL, "0")
+	field(INPA, "$(System)_BTS10:PG_D0855:VP_RD CP NMS")
+	field(INPB, "0.100")
+	field(CALC, "A > B ? 2 : 0")
+	field(OOPT, "Transition To Non-zero")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):VAC_FMAN:VP_STATE PP NMS")
+	field(PINI, "1")
+}
+
+record(calcout, "$(System):$(Area):VAC_FMAN:COND3_CALC")
+{
+	field(DESC, "Calc Vacuum Status Condition")
+	field(VAL, "0")
+	field(INPA, "$(System):$(Area):VAC_FMAN:COND1_CALC CP NMS")
+	field(INPB, "$(System):$(Area):VAC_FMAN:COND2_CALC CP NMS")
+	field(CALC, "A + B = 0 ? 3 : 0")
+	field(OOPT, "Transition To Non-zero")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):VAC_FMAN:VP_STATE PP NMS")
+	field(PINI, "1")
+}
+
+record(mbbo, "$(System):$(Area):VAC_FMAN:VP_STATE")
+{
+	field(DESC, "FManifold VP state")
+	field(ZRST, "INP Logic confused")
+	field(ZRVL, "0")
+	field(ONST, "Vac Below 50mTorr")
+	field(ONVL, "1")
+	field(TWST, "Vac Above 100mTorr")
+	field(TWVL, "2")
+	field(THST, "50mTorr < VP < 100mTorr")
+	field(THVL, "3")
+}
+
+####-------------------------------------------------------------####
+#	QA R-Manifold Status; X < 0.05Torr < X < 0.100Torr < X          #
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):VAC_RMAN:COND1_CALC")
+{
+	field(DESC, "Calc Vacuum Status Condition")
+	field(VAL, "0")
+	field(INPA, "$(System)_BTS10:PG_D0856:VP_RD CP NMS")
+	field(INPB, "0.050")
+	field(CALC, "A < B ? 1 : 0")
+	field(OOPT, "Transition To Non-zero")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):VAC_RMAN:VP_STATE PP NMS")
+	field(PINI, "1")
+}
+
+record(calcout, "$(System):$(Area):VAC_RMAN:COND2_CALC")
+{
+	field(DESC, "Calc Vacuum Status Condition")
+	field(VAL, "0")
+	field(INPA, "$(System)_BTS10:PG_D0856:VP_RD CP NMS")
+	field(INPB, "0.100")
+	field(CALC, "A > B ? 2 : 0")
+	field(OOPT, "Transition To Non-zero")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):VAC_RMAN:VP_STATE PP NMS")
+	field(PINI, "1")
+}
+
+record(calcout, "$(System):$(Area):VAC_RMAN:COND3_CALC")
+{
+	field(DESC, "Calc Vacuum Status Condition")
+	field(VAL, "0")
+	field(INPA, "$(System):$(Area):VAC_RMAN:COND1_CALC CP NMS")
+	field(INPB, "$(System):$(Area):VAC_RMAN:COND2_CALC CP NMS")
+	field(CALC, "A + B = 0 ? 3 : 0")
+	field(OOPT, "Transition To Non-zero")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):VAC_RMAN:VP_STATE PP NMS")
+	field(PINI, "1")
+}
+
+record(mbbo, "$(System):$(Area):VAC_RMAN:VP_STATE")
+{
+	field(DESC, "RManifold VP state")
+	field(ZRST, "INP Logic confused")
+	field(ZRVL, "0")
+	field(ONST, "Vac Below 50mTorr")
+	field(ONVL, "1")
+	field(TWST, "Vac Above 100mTorr")
+	field(TWVL, "2")
+	field(THST, "50mTorr < VP < 100mTorr")
+	field(THVL, "3")
+}

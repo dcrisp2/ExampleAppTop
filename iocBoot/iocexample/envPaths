@@ -1,0 +1,6 @@
+epicsEnvSet("ARCH","linux-x86_64")
+epicsEnvSet("IOC","iocexample")
+epicsEnvSet("TOP","/departments/operations/beamdev/crispd/ExampleAppTop")
+epicsEnvSet("EPICS_BASE","/departments/operations/beamdev/crispd/myepics/base")
+epicsEnvSet("EPICS_EXT","/departments/operations/beamdev/crispd/myepics/extensions/src")
+epicsEnvSet("CALC","/departments/operations/beamdev/crispd/myepics/extensions/src/calc-3-4")

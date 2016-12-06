@@ -1,0 +1,50 @@
+####-------------------------------------------------------------####	
+#	Channel Logic for individual vacuum stations                    #
+#	{ System , SubSystem , Instance , BOX , Area }                  #
+####-------------------------------------------------------------####
+#
+####-------------------------------------------------------------####
+#	Foreline Pirani Gauge reading low; FTST, "FPG not at SP"        #
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):FPG_$(BOX):VP1_CALC")
+{
+	field(DESC, "Calc PLC Foreline VP1 Status")
+	field(INPA, "$(System):$(Area)_$(BOX):FPG_$(Instance):OK_RSTS_VP1 CP NMS")
+	field(CALC, "A = 1 ? 0 : 14")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):FPG_$(BOX):FWD_LVP1_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):FPG_$(BOX):FWD_VP1_ILK")
+{
+	field(DESC, "Forwarding Foreline VP1 ILK State")
+	field(DOL,  "$(System):$(Area):FPG_$(BOX):VP1_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX):FV_$(Instance):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX):TGV_$(Instance):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+#	Turbo Molecular Pump not At Speed; FFST, "TMP not At Speed"     #
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):TMP_$(BOX):AS_CALC")
+{
+	field(DESC, "Calc PLC TMP ~At Speed Status")
+	field(INPA, "$(System):$(Area)_$(BOX):FPG_$(Instance):OK_RSTS_VP1 CP NMS")
+	field(CALC, "A = 1 ? 0 : 15")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):TGV_$(Instance):PLC_ILKS PP NMS")
+	field(PINI, "1")
+}
+
+#record(dfanout, "$(System):$(Area):TMP_$(BOX):FWD_AS_ILK")
+#{
+#	field(DESC, "Forwarding ~At Speed ILK State")
+#	field(DOL,  "$(System):$(Area):FPG_$(BOX):AS_CALC")
+##	field(OUTA, "$(System):$(Area)_$(BOX):FV_$(Instance):PLC_ILKS PP NMS")
+#	field(OUTA, "$(System):$(Area)_$(BOX):TGV_$(Instance):PLC_ILKS PP NMS")
+#}

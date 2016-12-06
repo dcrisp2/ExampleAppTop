@@ -1,0 +1,84 @@
+####-------------------------------------------------------------####
+#	For Pumps utilizing these channel 'signals':                    #
+#		ON_CMD                                                      #
+#		S_RD                                                        #
+#		OK_RSTS_S                                                   #
+#		PLC_ILKS - funnels external interlock status'...            #
+#		ILK_STAS - receives interlock status' + decodes val to str  #
+#	Devices using this so far:                                      #
+#		TMP - Turbo Molecular Pump                                  #
+####-------------------------------------------------------------####
+
+record(bo, "$(System):$(Area)_$(BOX):$(Device)_$(Instance):ON_CMD")
+{
+	field(DESC, "ON Command")
+	field(VAL, "1")
+	field(SCAN, "Passive")
+	field(ONAM, "1")
+	field(ZNAM, "0")
+	field(PINI, "1")
+}
+
+record(calc, "$(System):$(Area)_$(BOX):$(Device)_$(Instance):S_RD")
+{
+	field(DESC, "Pump - Rotations Per Minute")
+	field(SCAN, "1 second")
+	field(PREC, "3")
+	field(EGU,  "RPM")
+	field(INPA, "$(System)_$(SubSystem):$(Device)_$(Instance):S_RD PP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX):$(Device)_$(Instance):ON_CMD PP NMS")
+	field(CALC, "B = 0 ? 0 : A")
+	field(PINI, "1")
+}
+
+record(calc, "$(System):$(Area)_$(BOX):$(Device)_$(Instance):OK_RSTS_S")
+{
+	field(DESC, "Pressure SetPoint")
+	field(SCAN, "1 second")
+	field(INPA, "$(System):$(Area)_$(BOX):$(Device)_$(Instance):S_RD PP NMS")
+	field(CALC, "A < 50000 ? 0 : 1")
+	field(PINI, "1")
+}
+
+record(ao, "$(System):$(Area)_$(BOX):$(Device)_$(Instance):PLC_ILKS")
+{
+	field(DESC, "Asserts *:ILK_STAS state")
+	field(OUT, "$(System):$(Area)_$(BOX):$(Device)_$(Instance):ILK_STAS PP NMS")
+}
+
+record(mbbo, "$(System):$(Area)_$(BOX):$(Device)_$(Instance):ILK_STAS")
+{
+	field(DESC, "ILK Conditions")
+	field(ZRST, "OK to Operate")
+	field(ZRVL, "0000000000000000")
+#	field(ONST, "MAN Backing TMP")
+#	field(ONVL, "0000000000000001")
+#	field(TWST, "MAN Roughing")
+#	field(TWVL, "0000000000000010")
+#	field(THST, "Local RV Open")
+#	field(THVL, "0000000000000100")
+#	field(FRST, "Vent Valve Open")
+#	field(FRVL, "0000000000001000")
+#	field(FVST, "Local BGV(s) OPN")
+#	field(FVVL, "0000000000010000")
+	field(SXST, "Local TGV(s) CL")
+	field(SXVL, "0000000000100000")
+#	field(SVST, "Local CCG(s) ON")
+#	field(SVVL, "0000000001000000")
+#	field(EIST, "BAD")
+#	field(EIVL, "0000000010000000")
+#	field(NIST, "CCG(s) not at SP")
+#	field(NIVL, "0000000100000000")
+#	field(TEST, "Limit Mismatch")
+#	field(TEVL, "0000001000000000")
+#	field(ELST, "MAN PG not at SP")
+#	field(ELVL, "0000010000000000")
+#	field(TVST, "Other CCG(s) OFF")
+#	field(TVVL, "0000100000000000")
+	field(TTST, "B-L PG not at SP")
+	field(TTVL, "0001000000000000")
+#	field(FTST, "FPG not at SP")
+#	field(FTVL, "0010000000000000")
+#	field(FFST, "TMP not At Speed")
+#	field(FFVL, "0100000000000000")
+}

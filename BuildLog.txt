@@ -1,0 +1,31 @@
+make -C ./configure install 
+make[1]: Entering directory `/departments/operations/beamdev/crispd/ExampleAppTop/configure'
+make -C O.linux-x86_64 -f ../Makefile TOP=../.. T_A=linux-x86_64 install
+make[2]: Entering directory `/departments/operations/beamdev/crispd/ExampleAppTop/configure/O.linux-x86_64'
+perl /departments/operations/beamdev/crispd/myepics/base/bin/linux-x86_64/convertRelease.pl checkRelease
+make[2]: Leaving directory `/departments/operations/beamdev/crispd/ExampleAppTop/configure/O.linux-x86_64'
+make[1]: Leaving directory `/departments/operations/beamdev/crispd/ExampleAppTop/configure'
+make -C ./exampleApp install 
+make[1]: Entering directory `/departments/operations/beamdev/crispd/ExampleAppTop/exampleApp'
+make -C ./src install 
+make[2]: Entering directory `/departments/operations/beamdev/crispd/ExampleAppTop/exampleApp/src'
+make -C O.linux-x86_64 -f ../Makefile TOP=../../.. T_A=linux-x86_64 install
+make[3]: Entering directory `/departments/operations/beamdev/crispd/ExampleAppTop/exampleApp/src/O.linux-x86_64'
+make[3]: Nothing to be done for `install'.
+make[3]: Leaving directory `/departments/operations/beamdev/crispd/ExampleAppTop/exampleApp/src/O.linux-x86_64'
+make[2]: Leaving directory `/departments/operations/beamdev/crispd/ExampleAppTop/exampleApp/src'
+make -C ./Db install 
+make[2]: Entering directory `/departments/operations/beamdev/crispd/ExampleAppTop/exampleApp/Db'
+make -C O.linux-x86_64 -f ../Makefile TOP=../../.. T_A=linux-x86_64 install
+make[3]: Entering directory `/departments/operations/beamdev/crispd/ExampleAppTop/exampleApp/Db/O.linux-x86_64'
+make[3]: Nothing to be done for `install'.
+make[3]: Leaving directory `/departments/operations/beamdev/crispd/ExampleAppTop/exampleApp/Db/O.linux-x86_64'
+make[2]: Leaving directory `/departments/operations/beamdev/crispd/ExampleAppTop/exampleApp/Db'
+make[1]: Leaving directory `/departments/operations/beamdev/crispd/ExampleAppTop/exampleApp'
+make -C ./iocBoot install 
+make[1]: Entering directory `/departments/operations/beamdev/crispd/ExampleAppTop/iocBoot'
+make -C ./iocexample install 
+make[2]: Entering directory `/departments/operations/beamdev/crispd/ExampleAppTop/iocBoot/iocexample'
+make[2]: Nothing to be done for `install'.
+make[2]: Leaving directory `/departments/operations/beamdev/crispd/ExampleAppTop/iocBoot/iocexample'
+make[1]: Leaving directory `/departments/operations/beamdev/crispd/ExampleAppTop/iocBoot'

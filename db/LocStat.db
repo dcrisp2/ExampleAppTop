@@ -1,0 +1,446 @@
+####-------------------------------------------------------------####	
+#	Channel Logic for 'Local' areas; vacuum regions isolate-able    #
+#		via Beamline Gate Valves...                                 #
+#	{ System, Area, BOX1, BOX2, BOX3, BOX4, BOX5, BOX1F, BOX1R,     #
+#		BOX2F, BOX2R, BOX3F, BOX3R, BOX4F, BOX4R, BOX5F, BOX5R }    #
+#	{ REA,    QA,   BOB1, BOB2, BOB3, BOB4, LA,   D0864, D0865,     #
+#		D0892, D0893, D0918, D0919, D0947, D0948, D0999, D1000 }    #
+####-------------------------------------------------------------####
+#
+####-------------------------------------------------------------####
+#	Local Roughing Valve Open; THST, "Local RV Open"                #
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):RV_SECT1:LOPN_CALC")
+{
+	field(DESC, "Calc PLC Local OPN Status")
+	field(INPA, "$(System):$(Area)_$(BOX1):RV_$(BOX1F):LMCL_RSTS CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX1):RV_$(BOX1R):LMCL_RSTS CP NMS")
+	field(INPC, "$(System):$(Area)_$(BOX2):RV_$(BOX2F):LMCL_RSTS CP NMS")
+	field(INPD, "$(System):$(Area)_$(BOX2):RV_$(BOX2R):LMCL_RSTS CP NMS")
+	field(CALC, "A + B + C + D = 4 ? 0 : 3")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):RV_SECT1:FWD_LOPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):RV_SECT1:FWD_LOPN_ILK")
+{
+	field(DESC, "Forwarding Local OPN ILK state")
+	field(DOL,  "$(System):$(Area):RV_SECT1:LOPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX1):RV_$(BOX1F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX1):RV_$(BOX1R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX1):TGV_$(BOX1F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX2):RV_$(BOX2F):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX2):RV_$(BOX2R):PLC_ILKS PP NMS")
+	field(OUTF, "$(System):$(Area)_$(BOX2):TGV_$(BOX2F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):RV_SECT2:LOPN_CALC")
+{
+	field(DESC, "Calc PLC Local OPN Status")
+	field(INPA, "$(System):$(Area)_$(BOX3):RV_$(BOX3F):LMCL_RSTS CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX3):RV_$(BOX3R):LMCL_RSTS CP NMS")
+	field(INPC, "$(System):$(Area)_$(BOX4):RV_$(BOX4F):LMCL_RSTS CP NMS")
+	field(INPD, "$(System):$(Area)_$(BOX4):RV_$(BOX4R):LMCL_RSTS CP NMS")
+	field(CALC, "A + B + C + D = 4 ? 0 : 3")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):RV_SECT2:FWD_LOPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):RV_SECT2:FWD_LOPN_ILK")
+{
+	field(DESC, "Forwarding Local OPN ILK state")
+	field(DOL,  "$(System):$(Area):RV_SECT2:LOPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX3):RV_$(BOX3F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX3):RV_$(BOX3R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX3):TGV_$(BOX3F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX4):RV_$(BOX4F):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX4):RV_$(BOX4R):PLC_ILKS PP NMS")
+	field(OUTF, "$(System):$(Area)_$(BOX4):TGV_$(BOX4F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):RV_SECT3:LOPN_CALC")
+{
+	field(DESC, "Calc PLC Local OPN Status")
+	field(INPA, "$(System):$(Area)_$(BOX5):RV_$(BOX5F):LMCL_RSTS CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX5):RV_$(BOX5R):LMCL_RSTS CP NMS")
+	field(CALC, "A + B = 2 ? 0 : 3")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):RV_SECT3:FWD_LOPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):RV_SECT3:FWD_LOPN_ILK")
+{
+	field(DESC, "Forwarding Local OPN ILK state")
+	field(DOL,  "$(System):$(Area):RV_SECT3:LOPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX5):RV_$(BOX5F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX5):RV_$(BOX5R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX5):TGV_$(BOX5F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+#	Local Cold Cathode Gauge ON; SVST, "Local CCG(s) ON"            #
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):CCG_SECT1:LON_CALC")
+{
+	field(DESC, "Calc PLC Local ON Status")
+	field(INPA, "$(System):$(Area)_$(BOX1):CCG_$(BOX1F):ON_CMD CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX2):CCG_$(BOX2F):ON_CMD CP NMS")
+	field(CALC, "A + B = 0 ? 0 : 7")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):CCG_SECT1:FWD_LON_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):CCG_SECT1:FWD_LON_ILK")
+{
+	field(DESC, "Forwarding Local ON ILK state")
+	field(DOL,  "$(System):$(Area):CCG_SECT1:LON_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX1):RV_$(BOX1F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX1):RV_$(BOX1R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX2):RV_$(BOX2F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX2):RV_$(BOX2R):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX2):VV_$(BOX2F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):CCG_SECT2:LON_CALC")
+{
+	field(DESC, "Calc PLC Local ON Status")
+	field(INPA, "$(System):$(Area)_$(BOX3):CCG_$(BOX3F):ON_CMD CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX4):CCG_$(BOX4F):ON_CMD CP NMS")
+	field(CALC, "A + B = 0 ? 0 : 7")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):CCG_SECT2:FWD_LON_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):CCG_SECT2:FWD_LON_ILK")
+{
+	field(DESC, "Forwarding Local ON ILK state")
+	field(DOL,  "$(System):$(Area):CCG_SECT2:LON_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX3):RV_$(BOX3F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX3):RV_$(BOX3R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX4):RV_$(BOX4F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX4):RV_$(BOX4R):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX4):VV_$(BOX4F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):CCG_SECT3:LON_CALC")
+{
+	field(DESC, "Calc PLC Local ON Status")
+	field(INPA, "$(System):$(Area)_$(BOX5):CCG_$(BOX5F):ON_CMD CP NMS")
+	field(CALC, "A + B = 0 ? 0 : 7")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):CCG_SECT3:FWD_LON_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):CCG_SECT3:FWD_LON_ILK")
+{
+	field(DESC, "Forwarding Local ON ILK state")
+	field(DOL,  "$(System):$(Area):CCG_SECT3:LON_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX5):RV_$(BOX5F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX5):RV_$(BOX5R):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX5):VV_$(BOX5F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+#	Local Vent Valve Open; FRST, "ILK Local RV(s)"                  #
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):VV_SECT1:LOPN_CALC")
+{
+	field(DESC, "Calc PLC Local OPN Status")
+	field(INPA, "$(System):$(Area)_$(BOX2):VV_$(BOX2F):LMOP_RSTS CP NMS")
+	field(CALC, "A = 0 ? 0 : 4")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):VV_SECT1:FWD_LOPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):VV_SECT1:FWD_LOPN_ILK")
+{
+	field(DESC, "Forwarding Local OPN ILK state")
+	field(DOL,  "$(System):$(Area):VV_SECT1:LOPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX1):RV_$(BOX1F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX1):RV_$(BOX1R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX2):RV_$(BOX2F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX2):RV_$(BOX2R):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):VV_SECT2:LOPN_CALC")
+{
+	field(DESC, "Calc PLC Local OPN Status")
+	field(INPA, "$(System):$(Area)_$(BOX4):VV_$(BOX4F):LMOP_RSTS CP NMS")
+	field(CALC, "A = 0 ? 0 : 4")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):VV_SECT2:FWD_LOPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):VV_SECT2:FWD_LOPN_ILK")
+{
+	field(DESC, "Forwarding Local OPN ILK state")
+	field(DOL,  "$(System):$(Area):VV_SECT2:LOPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX3):RV_$(BOX3F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX3):RV_$(BOX3R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX4):RV_$(BOX4F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX4):RV_$(BOX4R):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):VV_SECT3:LOPN_CALC")
+{
+	field(DESC, "Calc PLC Local OPN Status")
+	field(INPA, "$(System):$(Area)_$(BOX5):VV_$(BOX5F):LMOP_RSTS CP NMS")
+	field(CALC, "A = 0 ? 0 : 4")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):VV_SECT3:FWD_LOPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):VV_SECT3:FWD_LOPN_ILK")
+{
+	field(DESC, "Forwarding Local OPN ILK state")
+	field(DOL,  "$(System):$(Area):VV_SECT3:LOPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX5):RV_$(BOX5F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX5):RV_$(BOX5R):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+#	Local Turbo Gate Valve Open; SXST, ILK Local TGV(s)             #
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):TGV_SECT1:LOPN_CALC")
+{
+	field(DESC, "Calc PLC Local OPN Status")
+	field(INPA, "$(System):$(Area)_$(BOX1):TGV_$(BOX1F):LMCL_RSTS CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX2):TGV_$(BOX2F):LMCL_RSTS CP NMS")
+	field(CALC, "A + B = 2 ? 0 : 6")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):TGV_SECT1:FWD_LOPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):TGV_SECT1:FWD_LOPN_ILK")
+{
+	field(DESC, "Forwarding Local OPN ILK state")
+	field(DOL,  "$(System):$(Area):TGV_SECT1:LOPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX1):RV_$(BOX1F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX1):RV_$(BOX1R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX2):RV_$(BOX2F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX2):RV_$(BOX2R):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX2):VV_$(BOX2F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):TGV_SECT2:LOPN_CALC")
+{
+	field(DESC, "Calc PLC Local OPN Status")
+	field(INPA, "$(System):$(Area)_$(BOX3):TGV_$(BOX3F):LMCL_RSTS CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX4):TGV_$(BOX4F):LMCL_RSTS CP NMS")
+	field(CALC, "A + B = 2 ? 0 : 6")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):TGV_SECT2:FWD_LOPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):TGV_SECT2:FWD_LOPN_ILK")
+{
+	field(DESC, "Forwarding Local OPN ILK state")
+	field(DOL,  "$(System):$(Area):TGV_SECT2:LOPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX3):RV_$(BOX3F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX3):RV_$(BOX3R):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX4):RV_$(BOX4F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX4):RV_$(BOX4R):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX4):VV_$(BOX4F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):TGV_SECT3:LOPN_CALC")
+{
+	field(DESC, "Calc PLC Local OPN Status")
+	field(INPA, "$(System):$(Area)_$(BOX5):TGV_$(BOX5F):LMCL_RSTS CP NMS")
+	field(CALC, "A = 1 ? 0 : 6")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):TGV_SECT3:FWD_LOPN_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):TGV_SECT3:FWD_LOPN_ILK")
+{
+	field(DESC, "Forwarding Local OPN ILK state")
+	field(DOL,  "$(System):$(Area):TGV_SECT3:LOPN_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX5):RV_$(BOX5F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX5):RV_$(BOX5R):PLC_ILKS PP NMS")
+	field(OUTE, "$(System):$(Area)_$(BOX5):VV_$(BOX5F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+#	Local Turbo Gate Valve Closed; SXST, ILK Local TGV(s)           #
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):TGV_SECT1:LCL_CALC")
+{
+	field(DESC, "Calc PLC Local CL Status")
+	field(INPA, "$(System):$(Area)_$(BOX1):TGV_$(BOX1F):LMOP_RSTS CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX2):TGV_$(BOX2F):LMOP_RSTS CP NMS")
+	field(CALC, "A + B = 2 ? 0 : 6")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):TGV_SECT1:FWD_LCL_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):TGV_SECT1:FWD_LCL_ILK")
+{
+	field(DESC, "Forwarding Local CL ILK state")
+	field(DOL,  "$(System):$(Area):TGV_SECT1:LCL_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX1):CCG_$(BOX1F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX2):CCG_$(BOX2F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):TGV_SECT2:LCL_CALC")
+{
+	field(DESC, "Calc PLC Local CL Status")
+	field(INPA, "$(System):$(Area)_$(BOX3):TGV_$(BOX3F):LMOP_RSTS CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX4):TGV_$(BOX4F):LMOP_RSTS CP NMS")
+	field(CALC, "A + B = 2 ? 0 : 6")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):TGV_SECT2:FWD_LCL_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):TGV_SECT2:FWD_LCL_ILK")
+{
+	field(DESC, "Forwarding Local CL ILK state")
+	field(DOL,  "$(System):$(Area):TGV_SECT2:LCL_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX3):CCG_$(BOX3F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX4):CCG_$(BOX4F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):TGV_SECT3:LCL_CALC")
+{
+	field(DESC, "Calc PLC Local CL Status")
+	field(INPA, "$(System):$(Area)_$(BOX5):TGV_$(BOX5F):LMOP_RSTS CP NMS")
+	field(CALC, "A = 1 ? 0 : 6")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):TGV_SECT3:FWD_LCL_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):TGV_SECT3:FWD_LCL_ILK")
+{
+	field(DESC, "Forwarding Local CL ILK state")
+	field(DOL,  "$(System):$(Area):TGV_SECT3:LCL_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX5):CCG_$(BOX5F):PLC_ILKS PP NMS")
+}
+
+####-------------------------------------------------------------####
+#	Local Pirani Gauge(s) reading low; TTST, "B-L PG not at SP"     #
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):PG_SECT1:LVP1_CALC")
+{
+	field(DESC, "Calc PLC Local VP Status")
+	field(INPA, "$(System):$(Area)_$(BOX1):PG_$(BOX1R):OK_RSTS_VP1 CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX2):PG_$(BOX2R):OK_RSTS_VP1 CP NMS")
+	field(CALC, "A + B = 2 ? 0 : 13")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):PG_SECT1:FWD_LVP1_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):PG_SECT1:FWD_LVP1_ILK")
+{
+	field(DESC, "Forwarding Local VP ILK state")
+	field(DOL,  "$(System):$(Area):PG_SECT1:LVP1_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX1):TGV_$(BOX1F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX1):CCG_$(BOX1F):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX2):TGV_$(BOX2F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX2):CCG_$(BOX2F):PLC_ILKS PP NMS")
+#	field(OUTE, "$(System):$(Area):PG_SECT1:FWD2_LVP1_ILK PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):PG_SECT2:LVP1_CALC")
+{
+	field(DESC, "Calc PLC Local VP Status")
+	field(INPA, "$(System):$(Area)_$(BOX3):PG_$(BOX3R):OK_RSTS_VP1 CP NMS")
+	field(INPB, "$(System):$(Area)_$(BOX4):PG_$(BOX4R):OK_RSTS_VP1 CP NMS")
+	field(CALC, "A + B = 2 ? 0 : 13")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):PG_SECT2:FWD_LVP1_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):PG_SECT2:FWD_LVP1_ILK")
+{
+	field(DESC, "Forwarding Local VP ILK state")
+	field(DOL,  "$(System):$(Area):PG_SECT2:LVP1_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX3):TGV_$(BOX3F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX3):CCG_$(BOX3F):PLC_ILKS PP NMS")
+	field(OUTC, "$(System):$(Area)_$(BOX4):TGV_$(BOX4F):PLC_ILKS PP NMS")
+	field(OUTD, "$(System):$(Area)_$(BOX4):CCG_$(BOX4F):PLC_ILKS PP NMS")
+#	field(OUTE, "$(System):$(Area):PG_SECT2:FWD2_LVP1_ILK PP NMS")
+}
+
+####-------------------------------------------------------------####
+
+record(calcout, "$(System):$(Area):PG_SECT3:LVP1_CALC")
+{
+	field(DESC, "Calc PLC Local VP Status")
+	field(INPA, "$(System):$(Area)_$(BOX5):PG_$(BOX5R):OK_RSTS_VP1 CP NMS")
+	field(CALC, "A = 1 ? 0 : 13")
+	field(OOPT, "On Change")
+	field(DOPT, "Use CALC")
+	field(OUT,  "$(System):$(Area):PG_SECT3:FWD_LVP1_ILK PP NMS")
+	field(PINI, "1")
+}
+
+record(dfanout, "$(System):$(Area):PG_SECT3:FWD_LVP1_ILK")
+{
+	field(DESC, "Forwarding Local VP ILK state")
+	field(DOL,  "$(System):$(Area):PG_SECT3:LVP1_CALC")
+	field(OUTA, "$(System):$(Area)_$(BOX5):TGV_$(BOX5F):PLC_ILKS PP NMS")
+	field(OUTB, "$(System):$(Area)_$(BOX5):CCG_$(BOX5F):PLC_ILKS PP NMS")
+#	field(OUTE, "$(System):$(Area):PG_SECT3:FWD2_LVP1_ILK PP NMS")
+}
